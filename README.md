@@ -1,4 +1,4 @@
-# ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
+![image](https://github.com/user-attachments/assets/735727e6-0637-4bbb-bb74-0a213c942829)# ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
 ## Table of Contents
 - [About](#-about)
 - [Features](#-features)
@@ -51,8 +51,13 @@ The bot can:
   </p>
 
 ## 🛠️ Installation
-  
+
 * Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
+* Get your API key [Your API Key](https://www.weatherapi.com/my/)
+  <p align="center">
+  <img src="https://i.imgur.com/HzgaZgp.png" />
+  </p>
+  
 
 ## ✨ Usage
 ### Commands
