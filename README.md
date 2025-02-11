@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/735727e6-0637-4bbb-bb74-0a213c942829)# ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
+![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
 ## Table of Contents
 - [About](#-about)
 - [Features](#-features)
@@ -53,11 +53,20 @@ The bot can:
 ## 🛠️ Installation
 
 * Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
-* Get your API key [Your API Key](https://www.weatherapi.com/my/)
+* Get your API Key [Your API Key](https://www.weatherapi.com/my/)
   <p align="center">
   <img src="https://i.imgur.com/HzgaZgp.png" />
   </p>
-  
+* Create a  `.env` file and fill it out based on the example
+  ```env
+    DISCORD_TOKEN=your_discord_token
+    WEATHER_API_KEY=your_weather_api_key
+    WEATHER_CHANNEL_ID=your_weather_channel_id
+    FORECAST_CHANNEL_ID=your_forecast_channel_id
+    ALERTS_CHANNEL_ID=your_alert_channel_id
+* Install Python packages
+  ```sh
+  pip install -r requirements.txt
 
 ## ✨ Usage
 ### Commands
