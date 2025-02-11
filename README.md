@@ -1,9 +1,9 @@
 # ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
 ## Table of Contents
-- [About](#about)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
+- [About](#-about)
+- [Features](#-features)
+- [Installation](#-installation)
+- [Usage](#-usage)
   
 ## 🚀 About
 A simple Discord bot written in Python that uses [WeatherAPI.com](https://www.weatherapi.com/) to provide weather-related data.
