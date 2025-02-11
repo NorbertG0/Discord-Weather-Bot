@@ -2,19 +2,15 @@
 ## Table of Contents
 - [About](#-about)
 - [Features](#-features)
-- [Installation](#🛠️-installation)
+- [Installation](#-installation)
 - [Usage](#-usage)
   
 ## 🚀 About
-A simple Discord bot written in Python that uses [WeatherAPI.com](https://www.weatherapi.com/) to provide weather-related data.
-The bot can:
+<p align="justify">
+This is a simple Discord bot written in Python that provides real-time weather information using WeatherAPI.com. The bot allows users to request weather data for any location—including current conditions, forecasts, temperature, humidity, wind speed, and more—and integrates seamlessly with Discord to enable interaction via text commands. Weather details are fetched from WeatherAPI.com and delivered in an easy-to-read format.
 
-* Display current weather data for any city.
-* Display weather forecasts for today or next three days.
-* Send weather alerts for specific locations.
-* Provide detailed air quality information for a selected city.
-* Allow users to change the default city being tracked.
-* Let users change the language of the weather data.
+This project is my first major undertaking using Python. Through its development, I learned how API connections work, how to process and utilize received data, and how to handle JSON responses. Additionally, I gained valuable experience working with external libraries, structuring a Python project, creating GitHub repositories, and writing effective README documentation.
+</p>
 
 ## ⚙️ Features
 
@@ -54,7 +50,7 @@ The bot can:
   <img src="https://i.imgur.com/8tZK4SP.png" />
   </p>
 
-## 🛠️ Installation
+## 🛠️ Installation / Getting started
 
 * Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
 * Get your API Key [Your API Key](https://www.weatherapi.com/my/)
@@ -69,7 +65,7 @@ The bot can:
     FORECAST_CHANNEL_ID=your_forecast_channel_id
     ALERTS_CHANNEL_ID=your_alert_channel_id
    ```
-* Install Python packages
+* Open the terminal and install Python packages
   ```sh
   pip install -r requirements.txt
    ```
@@ -78,6 +74,11 @@ The bot can:
   + [discord.py](https://pypi.org/project/discord.py/)
   + [python-dotenv](https://pypi.org/project/python-dotenv/)
   + [plotly](https://pypi.org/project/plotly/)
+
+* Execute the program
+  ```sh
+  python main.py
+  ```
   
 ## ✨ Usage
 ### Commands
