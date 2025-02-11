@@ -18,32 +18,40 @@ The bot can:
 
 ## ⚙️ Features
 
-* Current Weather: Displays current weather details (temperature, humidity, wind speed, pressure and quality of air informations).
+* **Current Weather**: Displays current weather details (temperature, humidity, wind speed, pressure and quality of air informations).
   <p align="center">
   <img src="https://i.imgur.com/WkNF8i7.png" />
   </p>
-* Weather Forecast: Shows weather forecast for today or next three days.
+* **Weather Forecast**: Shows weather forecast for today or next three days.
   <p align="center">
   <img src="https://i.imgur.com/5RMxh4F.png" />
   </p>
-* Weather Alerts: Sends notifications about important weather events and alerts for selected city.
+* **Weather Alerts**: Sends notifications about important weather events and alerts for selected city.
   <p align="center">
   <img src="https://i.imgur.com/PcgnnXz.png" />
   </p>
-* Air Quality Information: Provides detailed air quality data such as AQI (Air Quality Index) for a city.
+* **Air Quality Information**: Provides detailed air quality data such as AQI (Air Quality Index) for a city.
   <p align="center">
   <img src="https://i.imgur.com/hCqyuj4.png" />
   </p>
-* Default City Change: Administrator can set or change the default city that the bot tracks.
+* **Default City Change**: Administrator can set or change the default city that the bot tracks.
   <p align="center">
   <img src="https://i.imgur.com/oKMSJrY.png" />
   </p>
-* Language Change: Administrator can change the language of the weather data.
+* **Language Change**: Administrator can change the language of the weather data.
   <p align="center">
   <img src="https://i.imgur.com/yIIJamB.png" />
   </p>
+* **Command Error Handling**: The bot detects and handles invalid commands or missing arguments.
+  <p align="center">
+  <img src="https://i.imgur.com/pe0ksxp.png" />
+  </p>
+  <p align="center">
+  <img src="https://i.imgur.com/8tZK4SP.png" />
+  </p>
 
-## 📝 Installation
+## 🛠️ Installation
+  
 * Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
 
 ## ✨ Usage
