@@ -19,8 +19,13 @@ The bot can:
 ## ⚙️ Features
 
 * Current Weather: Displays current weather details (temperature, humidity, wind speed, pressure and quality of air informations).
-  ![Current_weather](https://i.imgur.com/WkNF8i7.png)
+  <p align="center">
+  <img src="https://i.imgur.com/WkNF8i7.png" />
+  </p>
 * Weather Forecast: Shows weather forecast for today or next three days.
+  <p align="center">
+  <img src="https://i.imgur.com/5RMxh4F.png" />
+  </p>
   ![Forecast](https://i.imgur.com/5RMxh4F.png)
 * Weather Alerts: Sends notifications about important weather events and alerts for selected city.
   ![Weather_alert](https://i.imgur.com/PcgnnXz.png)
