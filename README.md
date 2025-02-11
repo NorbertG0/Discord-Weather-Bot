@@ -26,15 +26,22 @@ The bot can:
   <p align="center">
   <img src="https://i.imgur.com/5RMxh4F.png" />
   </p>
-  ![Forecast](https://i.imgur.com/5RMxh4F.png)
 * Weather Alerts: Sends notifications about important weather events and alerts for selected city.
-  ![Weather_alert](https://i.imgur.com/PcgnnXz.png)
+  <p align="center">
+  <img src="https://i.imgur.com/PcgnnXz.png" />
+  </p>
 * Air Quality Information: Provides detailed air quality data such as AQI (Air Quality Index) for a city.
-  ![aqi](https://i.imgur.com/hCqyuj4.png)
+  <p align="center">
+  <img src="https://i.imgur.com/hCqyuj4.png" />
+  </p>
 * Default City Change: Administrator can set or change the default city that the bot tracks.
-  ![city](https://i.imgur.com/oKMSJrY.png)
+  <p align="center">
+  <img src="https://i.imgur.com/oKMSJrY.png" />
+  </p>
 * Language Change: Administrator can change the language of the weather data.
-  ![lang](https://i.imgur.com/yIIJamB.png)
+  <p align="center">
+  <img src="https://i.imgur.com/yIIJamB.png" />
+  </p>
 
 ## 📝 Installation
 * Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
