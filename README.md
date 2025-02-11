@@ -1,4 +1,4 @@
-![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
+# ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
 ## Table of Contents
 - [About](#-about)
 - [Features](#-features)
@@ -68,9 +68,16 @@ The bot can:
     WEATHER_CHANNEL_ID=your_weather_channel_id
     FORECAST_CHANNEL_ID=your_forecast_channel_id
     ALERTS_CHANNEL_ID=your_alert_channel_id
+   ```
 * Install Python packages
   ```sh
   pip install -r requirements.txt
-
+   ```
+  Packages documentation
+  + [requests](https://pypi.org/project/requests/)
+  + [discord.py](https://pypi.org/project/discord.py/)
+  + [python-dotenv](https://pypi.org/project/python-dotenv/)
+  + [plotly](https://pypi.org/project/plotly/)
+  
 ## ✨ Usage
 ### Commands
