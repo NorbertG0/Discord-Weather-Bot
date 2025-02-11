@@ -26,6 +26,10 @@ The bot can:
   <p align="center">
   <img src="https://i.imgur.com/5RMxh4F.png" />
   </p>
+* **Forecast Graph**: Creates a graph based on the weather forecast.
+  <p align="center">
+  <img src="https://i.imgur.com/kOhvH1o.png" />
+  </p>
 * **Weather Alerts**: Sends notifications about important weather events and alerts for selected city.
   <p align="center">
   <img src="https://i.imgur.com/PcgnnXz.png" />
