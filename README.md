@@ -82,3 +82,4 @@ This project is my first major undertaking using Python. Through its development
   
 ## ✨ Usage
 ### Commands
+After running the program, you can type anything (the bot will respond with how to check all available commands) or type `!commands`.
