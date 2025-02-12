@@ -2,7 +2,7 @@
 ## Table of Contents
 - [About](#-about)
 - [Features](#-features)
-- [Installation](#-installation---getting-started)
+- [Installation](#-installation)
 - [Usage](#-usage)
   
 ## 🚀 About
@@ -48,7 +48,7 @@ This is a simple Discord bot written in Python that provides real-time weather i
   <img src="https://i.imgur.com/8tZK4SP.png" />
   </p>
 
-## 🛠 Installation / Getting started
+## 🛠 Installation
 * Create and configure your bot on [Discord Developer Portal](https://discord.com/developers/applications)
 * Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
 * Get your API Key [Your API Key](https://www.weatherapi.com/my/)
