@@ -1,5 +1,5 @@
 # ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
-## Table of Contents
+## 📑 Table of Contents
 - [About](#-about)
 - [Features](#-features)
 - [Installation](#-installation)
