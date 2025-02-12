@@ -10,7 +10,7 @@
 This is a simple Discord bot written in Python that provides real-time weather information using WeatherAPI.com. Users can request weather data for any location, including current conditions, forecasts, temperature, humidity, wind speed, and more. The bot integrates seamlessly with Discord, allowing interaction through text commands. Weather details are fetched from WeatherAPI.com and presented in a clear, easy-to-read format.
 </p>
 
-## ⚙️ Features
+## ⚙ Features
 
 * **Current Weather**: Displays current weather details (temperature, humidity, wind speed, pressure and quality of air informations).
   <p align="center">
@@ -48,7 +48,7 @@ This is a simple Discord bot written in Python that provides real-time weather i
   <img src="https://i.imgur.com/8tZK4SP.png" />
   </p>
 
-## 🛠️ Installation / Getting started
+## 🛠 Installation / Getting started
 * Create and configure your bot on [Discord Developer Portal](https://discord.com/developers/applications)
 * Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
 * Get your API Key [Your API Key](https://www.weatherapi.com/my/)
