@@ -7,9 +7,7 @@
   
 ## 🚀 About
 <p align="justify">
-This is a simple Discord bot written in Python that provides real-time weather information using WeatherAPI.com. The bot allows users to request weather data for any location—including current conditions, forecasts, temperature, humidity, wind speed, and more—and integrates seamlessly with Discord to enable interaction via text commands. Weather details are fetched from WeatherAPI.com and delivered in an easy-to-read format.
-
-This project is my first major undertaking using Python. Through its development, I learned how API connections work, how to process and utilize received data, and how to handle JSON responses. Additionally, I gained valuable experience working with external libraries, structuring a Python project, creating GitHub repositories, and writing effective README documentation.
+This is a simple Discord bot written in Python that provides real-time weather information using WeatherAPI.com. Users can request weather data for any location, including current conditions, forecasts, temperature, humidity, wind speed, and more. The bot integrates seamlessly with Discord, allowing interaction through text commands. Weather details are fetched from WeatherAPI.com and presented in a clear, easy-to-read format.
 </p>
 
 ## ⚙️ Features
@@ -51,7 +49,7 @@ This project is my first major undertaking using Python. Through its development
   </p>
 
 ## 🛠️ Installation / Getting started
-
+* Create and configure your bot on [Discord Developer Portal](https://discord.com/developers/applications)
 * Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
 * Get your API Key [Your API Key](https://www.weatherapi.com/my/)
   <p align="center">
@@ -65,6 +63,13 @@ This project is my first major undertaking using Python. Through its development
     FORECAST_CHANNEL_ID=your_forecast_channel_id
     ALERTS_CHANNEL_ID=your_alert_channel_id
    ```
+  + To get your Discord token, click "Reset".
+    <p align="center">
+    <img src="https://i.imgur.com/qfStkrM.png" />
+    </p>
+
+  + You need to turn on developer mode in settings to see channels id's (right click on channel).
+  
 * Open the terminal and install Python packages
   ```sh
   pip install -r requirements.txt
@@ -79,7 +84,12 @@ This project is my first major undertaking using Python. Through its development
   ```sh
   python main.py
   ```
+  If you have completed all the steps correctly, you should get this result in the console.
+  <p align="center">
+  <img src="https://i.imgur.com/Q15wQKq.png" />
+  </p>
+  The bot is now ready to work.
   
 ## ✨ Usage
 ### Commands
-After running the program, you can type anything (the bot will respond with how to check all available commands) or type `!commands`.
+After running the program, type  `!commands` to see all available commands.
