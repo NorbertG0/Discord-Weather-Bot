@@ -2,7 +2,7 @@
 ## Table of Contents
 - [About](#-about)
 - [Features](#-features)
-- [Installation](#-installation)
+- [Installation](#-installation-/-getting-started)
 - [Usage](#-usage)
   
 ## 🚀 About
