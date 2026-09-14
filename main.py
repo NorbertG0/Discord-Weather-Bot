@@ -8,6 +8,7 @@ async def main():
 
     async with bot:
         await bot.load_extension("cogs.weather")
+        await bot.load_extension("cogs.forecast")
         await bot.start(settings.DISCORD_TOKEN)
 
 if __name__ == "__main__":

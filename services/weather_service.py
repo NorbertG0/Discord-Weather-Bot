@@ -43,3 +43,40 @@ class WeatherService:
         }
 
         return weather, None
+
+    def get_forecast_today(self, city, lang="en", alerts="no", aqi="no"):
+
+        data, error = self.api.get_forecast(city, lang, alerts, aqi)
+
+        if error:
+            return None, error
+
+        location = data["location"]
+        current = data["current"]
+        forecast = data["forecast"]["forecastday"][0]["day"]
+
+        weather = {
+            "city": location["name"],
+            "country": location["country"],
+            "last_update": current["last_updated"],
+
+            "maxtemp_c": forecast['maxtemp_c'],
+            "maxtemp_f": forecast['maxtemp_f'],
+            "mintemp_c": forecast['mintemp_c'],
+            "mintemp_f": forecast['mintemp_f'],
+            "avgtemp_c": forecast['avgtemp_c'],
+            "avgtemp_f": forecast['avgtemp_f'],
+            "maxwind_kph": forecast['maxwind_kph'],
+            "totalprecip_mm": forecast['totalprecip_mm'],
+            "totalsnow_cm": forecast['totalsnow_cm'],
+            "avgvis_km": forecast['avgvis_km'],
+            "avghumidity": forecast['avghumidity'],
+            "daily_chance_of_rain": forecast['daily_chance_of_rain'],
+            "daily_chance_of_snow": forecast['daily_chance_of_snow'],
+            "uv": forecast['uv'],
+
+            "text": forecast["condition"]["text"],
+            "icon": forecast["condition"]["icon"],
+        }
+
+        return weather, None
