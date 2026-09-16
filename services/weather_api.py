@@ -49,3 +49,16 @@ class WeatherAPI:
                 "aqi": aqi,
             }
         )
+
+    def get_forecast_longterm(self, city, days="3", lang="en", alerts="yes", aqi="no"):
+
+        return self._get(
+            "forecast.json",
+            {
+                "q": city,
+                "days": days,
+                "lang": lang,
+                "alerts": alerts,
+                "aqi": aqi,
+            }
+        )

@@ -80,3 +80,28 @@ class WeatherService:
         }
 
         return weather, None
+
+    def get_forecast_longterm(self, city, days="3", lang="en", alerts="yes", aqi="no"):
+
+        data, error = self.api.get_forecast_longterm(city, days, lang, alerts, aqi)
+
+        if error:
+            return None, error
+
+        location = data["location"]
+        current = data["current"]
+        forecast = data["forecast"]["forecastday"]
+
+        max_temp_day = {x['date'] : x['day']['maxtemp_c'] for x in forecast}
+        text = {x['date'] : x['day']['condition']['text'] for x in forecast}
+
+        weather = {
+            "city": location["name"],
+            "country": location["country"],
+
+            "last_update": current["last_updated"],
+            "max_temp_day": max_temp_day,
+            "text": text,
+        }
+
+        return weather, None
