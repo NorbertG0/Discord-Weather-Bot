@@ -15,8 +15,8 @@ class Weather(commands.Cog):
 
     @commands.command(name="weather")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def weather(self, ctx, *, arg=None):
-        error_msg = validate_city_name(arg, "weather")
+    async def weather(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "weather")
 
         if error_msg:
             await ctx.send(error_msg)
@@ -28,7 +28,7 @@ class Weather(commands.Cog):
             await ctx.send("Weather channel not found.")
             return
 
-        weather, error = self.weather_service.get_current_weather(arg, settings.LANG)
+        weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
 
         if error:
             await ctx.send(f"⚠️ {error}")
@@ -66,6 +66,28 @@ class Weather(commands.Cog):
         embed.set_footer(text=f'last update - {weather["last_updated"]}')
 
         await ctx.send(embed=embed)
+
+    @commands.command(name="plot")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def plot(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "plot")
+
+        if error_msg:
+            await ctx.channel.send(error_msg)
+            return
+
+        plot, error = self.weather_service.create_plot(city_name, days="1", alerts="no", aqi="no")
+
+        if error:
+            await ctx.send(f"⚠️ {error}")
+            return
+
+        file = discord.File(plot, filename="plot.png")
+
+        embed = discord.Embed(title=f'📊 Temperature graph ({city_name})', color=0x346eeb)
+        embed.set_image(url='attachment://plot.png')
+
+        await ctx.send(embed=embed, file=file)
 
 
 async def setup(bot):
