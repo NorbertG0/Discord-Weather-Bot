@@ -62,3 +62,15 @@ class WeatherAPI:
                 "aqi": aqi,
             }
         )
+
+    def get_data_for_plot(self, city, days="1", alerts="no", aqi="no"):
+
+        return self._get(
+            "forecast.json",
+            {
+                "q": city,
+                "days": days,
+                "alerts": alerts,
+                "aqi": aqi,
+            }
+        )
