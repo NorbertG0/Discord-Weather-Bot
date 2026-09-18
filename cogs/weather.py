@@ -111,5 +111,29 @@ class Weather(commands.Cog):
 
         await ctx.channel.send(embed=embed)
 
+    @commands.command(name="wind")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def wind(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "wind")
+
+        if error_msg:
+            await ctx.channel.send(error_msg)
+            return
+
+        weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        embed = discord.Embed(
+            title=(
+                f'{weather["city"]} '
+                f'({weather["country"]})'
+                ),
+            description=f'💨 {weather["wind_kph"]} km/h',
+            color=0x346eeb
+        )
+        embed.set_thumbnail(url='https:' + str(weather["icon"]))
+        embed.set_footer(text='last update - ' + str(weather["last_updated"]))
+
+        await ctx.channel.send(embed=embed)
+
 async def setup(bot):
     await bot.add_cog(Weather(bot))
