@@ -89,6 +89,27 @@ class Weather(commands.Cog):
 
         await ctx.send(embed=embed, file=file)
 
+    @commands.command(name="temperature")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def temperature(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "temperature")
+
+        if error_msg:
+            await ctx.channel.send(error_msg)
+            return
+
+        weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        embed = discord.Embed(
+            title=f'{weather["city"]} ({weather["country"]})',
+            description=f'🌡️ {weather["temperature_c"]}℃  ({weather["temperature_f"]} °F)',
+            color=0x346eeb
+        )
+
+        embed.set_thumbnail(url='https:' + str(weather["icon"]))
+        embed.set_footer(text='last update - ' + str(weather["last_updated"]))
+
+        await ctx.channel.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(Weather(bot))
