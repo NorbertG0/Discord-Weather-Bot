@@ -101,8 +101,14 @@ class Weather(commands.Cog):
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
 
         embed = discord.Embed(
-            title=f'{weather["city"]} ({weather["country"]})',
-            description=f'🌡️ {weather["temperature_c"]}℃  ({weather["temperature_f"]} °F)',
+            title=(
+                f'{weather["city"]} '
+                f'({weather["country"]})'
+            ),
+            description=(
+                f'🌡️ {weather["temperature_c"]}℃  '
+                f'({weather["temperature_f"]} °F)'
+            ),
             color=0x346eeb
         )
 
@@ -126,10 +132,11 @@ class Weather(commands.Cog):
             title=(
                 f'{weather["city"]} '
                 f'({weather["country"]})'
-                ),
+            ),
             description=f'💨 {weather["wind_kph"]} km/h',
             color=0x346eeb
         )
+
         embed.set_thumbnail(url='https:' + str(weather["icon"]))
         embed.set_footer(text='last update - ' + str(weather["last_updated"]))
 
