@@ -191,5 +191,51 @@ class Weather(commands.Cog):
 
         await ctx.channel.send(embed=embed)
 
+    @commands.command(name="aqi")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def air_quality(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "air_quality")
+
+        if error_msg:
+            await ctx.channel.send(error_msg)
+            return
+
+        weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        embed = discord.Embed(
+            title=(
+                f'{weather["city"]} '
+                f'({weather["country"]})'
+            ),
+            description='',
+            color=0x346eeb
+        )
+
+        embed.add_field(name='Quality of air', value='', inline=False)
+
+        embed.add_field(
+            name=(
+                f'CO - {weather["co"]} mg/m³      '
+                f'NO₂ - {weather["no2"]} µg/m³      '
+                f'PM₂ ̦₅ - {weather["pm2_5"]} µg/m³'
+            ),
+            value='',
+            inline=False
+        )
+
+        embed.add_field(
+            name=(
+                f'O₃ - {weather["o3"]} µg/m³      '
+                f'SO₂ - {weather["so2"]} µg/m³      '
+                f'PM₁₀ - {weather["pm10"]} µg/m³'
+            ),
+            value='',
+            inline=False
+        )
+
+        embed.set_footer(text='last update - ' + str(weather["last_updated"]))
+
+        await ctx.channel.send(embed=embed)
+
 async def setup(bot):
     await bot.add_cog(Weather(bot))
