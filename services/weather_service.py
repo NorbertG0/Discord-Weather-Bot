@@ -61,7 +61,7 @@ class WeatherService:
         weather = {
             "city": location["name"],
             "country": location["country"],
-            "last_update": current["last_updated"],
+            "last_updated": current["last_updated"],
 
             "maxtemp_c": forecast['maxtemp_c'],
             "maxtemp_f": forecast['maxtemp_f'],

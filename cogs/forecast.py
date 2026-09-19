@@ -74,7 +74,7 @@ class Forecast(commands.Cog):
         )
 
         embed.add_field(name='――――――――――――――――――――――――――――――――', value='', inline=False)
-        embed.set_footer(text='last update - ' + str(forecast["last_update"]))
+        embed.set_footer(text='last update - ' + str(forecast["last_updated"]))
 
         await ctx.send(embed=embed)
 
