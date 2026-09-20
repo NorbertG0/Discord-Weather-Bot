@@ -1,9 +1,14 @@
 import discord
 from discord.ext import commands
+import logging
 
 from bot.config import settings
 from services.weather_service import WeatherService
 from utils.validators import validate_city_name
+
+
+logger = logging.getLogger(__name__)
+
 
 class Forecast(commands.Cog):
     def __init__(self, bot):
@@ -16,6 +21,7 @@ class Forecast(commands.Cog):
         error_msg = validate_city_name(city_name, "forecasttoday")
 
         if error_msg:
+            logger.warning("!forecasttoday | Invalid command attempt, validation error | user=%s", ctx.author)
             await ctx.channel.send(error_msg)
             return
 
@@ -27,8 +33,11 @@ class Forecast(commands.Cog):
         )
 
         if error:
+            logger.warning(f"Forecast data error | user=%s", ctx.author)
             await ctx.channel.send(f"⚠️ {error}")
             return
+
+        logger.info("!forecasttoday | Forecast retrieved | user=%s | city=%s", ctx.author, city_name)
 
         embed = discord.Embed(
             title=(f'{forecast["city"]} '
@@ -84,6 +93,7 @@ class Forecast(commands.Cog):
         error_msg = validate_city_name(city_name, "forecast")
 
         if error_msg:
+            logger.warning("!forecast | Invalid command attempt, validation error | user=%s", ctx.author)
             await ctx.channel.send(error_msg)
             return
 
@@ -96,7 +106,10 @@ class Forecast(commands.Cog):
         )
 
         if error:
+            logger.warning(f"!forecast | Forecast data error | user=%s", ctx.author)
             await ctx.channel.send(error_msg)
+
+        logger.info("!forecast | Forecast retrieved | user=%s | city=%s", ctx.author, city_name)
 
         embed = discord.Embed(
             title=(f'{forecast["city"]} '
