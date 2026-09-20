@@ -1,7 +1,12 @@
 from discord.ext import commands
+import logging
 
 from bot.config import settings
 from utils.validators import validate_city_name
+
+
+logger = logging.getLogger(__name__)
+
 
 class Admin(commands.Cog):
     def __init__(self, bot):
@@ -14,10 +19,19 @@ class Admin(commands.Cog):
         error_msg = validate_city_name(city_name, "setcity")
 
         if error_msg:
+            logger.warning(f"Invalid !setcity attempt | user=%s",ctx.author)
             await ctx.send(error_msg)
             return
 
+        old_city_name = settings.DEFAULT_CITY
         settings.DEFAULT_CITY = city_name
+
+        logger.info(
+            f"Default city changed | user=%s | old=%s | new=%s",
+            ctx.author,
+            old_city_name,
+            city_name
+        )
 
         await ctx.send(f"✅ Default city changed to **{city_name}**.")
 
@@ -27,12 +41,21 @@ class Admin(commands.Cog):
     async def setlang(self, ctx, language=None):
 
         if language is None:
+            logger.warning("Invalid !setlang attempt | user=%s", ctx.author)
             await ctx.send("❌ Usage: `!setlang country code` example: `!setlang en`")
             return
 
         language = language.lower()
 
+        old_language = settings.LANG
         settings.LANG = language
+
+        logger.info(
+            f"Default language changed | user=%s | old=%s | new=%s",
+            ctx.author,
+            old_language,
+            language
+        )
 
         await ctx.send(f"✅ Language changed to **{language}**.")
 
