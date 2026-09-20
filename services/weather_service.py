@@ -105,6 +105,7 @@ class WeatherService:
             "last_update": current["last_updated"],
             "max_temp_day": max_temp_day,
             "text": text,
+            "alerts": data["alerts"]["alert"],
         }
 
         return weather, None
