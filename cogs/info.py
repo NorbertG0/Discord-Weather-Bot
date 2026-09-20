@@ -1,5 +1,10 @@
 import discord
 from discord.ext import commands
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 class Commands(commands.Cog):
     def __init__(self, bot):
@@ -8,6 +13,8 @@ class Commands(commands.Cog):
     @commands.command(name='commands')
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def show_commands(self, ctx):
+        logger.info("!commands | Command list requested | user=%s", ctx.author)
+
         embed = discord.Embed(title='All available commands', description='', color=0x346eeb)
         embed.add_field(name='`!commands` - Shows all available commands.', value='', inline=False)
         embed.add_field(
