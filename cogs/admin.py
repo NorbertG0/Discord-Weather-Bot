@@ -19,7 +19,7 @@ class Admin(commands.Cog):
         error_msg = validate_city_name(city_name, "setcity")
 
         if error_msg:
-            logger.warning(f"Invalid !setcity attempt | user=%s",ctx.author)
+            logger.warning("!setcity | Invalid !setcity attempt | user=%s",ctx.author)
             await ctx.send(error_msg)
             return
 
@@ -27,7 +27,7 @@ class Admin(commands.Cog):
         settings.DEFAULT_CITY = city_name
 
         logger.info(
-            f"Default city changed | user=%s | old=%s | new=%s",
+            "!setcity | Default city changed | user=%s | old=%s | new=%s",
             ctx.author,
             old_city_name,
             city_name
@@ -41,7 +41,7 @@ class Admin(commands.Cog):
     async def setlang(self, ctx, language=None):
 
         if language is None:
-            logger.warning("Invalid !setlang attempt | user=%s", ctx.author)
+            logger.warning("!setlang | Invalid !setlang attempt | user=%s", ctx.author)
             await ctx.send("❌ Usage: `!setlang country code` example: `!setlang en`")
             return
 
@@ -51,7 +51,7 @@ class Admin(commands.Cog):
         settings.LANG = language
 
         logger.info(
-            f"Default language changed | user=%s | old=%s | new=%s",
+            f"!setlang | Default language changed | user=%s | old=%s | new=%s",
             ctx.author,
             old_language,
             language
