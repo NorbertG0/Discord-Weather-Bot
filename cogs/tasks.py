@@ -11,9 +11,11 @@ class Tasks(commands.Cog):
         self.weather_service = WeatherService()
 
         self.daily_weather.start()
+        self.alert.start()
 
     def cog_unload(self):
         self.daily_weather.cancel()
+        self.alert.cancel()
 
     @tasks.loop(hours=24)
     async def daily_weather(self):
@@ -88,8 +90,63 @@ class Tasks(commands.Cog):
         await channel.send(f"@here Today's forecast for {settings.DEFAULT_CITY}.")
         await channel.send(embed=embed)
 
+    @tasks.loop(hours=24)
+    async def alert(self):
+        channel = await self.bot.fetch_channel(settings.ALERTS_CHANNEL_ID)
+
+        if channel is None:
+            print("Alert task channel not found")
+            return
+
+        data, error = self.weather_service.get_forecast_longterm(
+            settings.DEFAULT_CITY,
+            "3",
+            settings.LANG,
+            "yes",
+            "no"
+        )
+
+        if error:
+            print(f"Alert error: {error}")
+            return
+
+        alerts = data["alerts"]
+
+        if not alerts:
+            await channel.send(f"There are no alerts for {settings.DEFAULT_CITY}.")
+            return
+
+        for alert in alerts:
+            embed = discord.Embed(
+                title=f'⚠️ ‼️ Warning! ({alert["event"]}) ‼️ ⚠️ ',
+                description=(
+                    f'**{alert["headline"]}** '
+                    f'{alert["areas"]} \n'
+                    f'{alert["note"]}'
+                ),
+                color=0xfc0303
+            )
+
+            embed.add_field(
+                name=(
+                    f'**{alert["effective"]}  -  '
+                     f'{alert["expires"]}**'
+                ),
+                value='',
+                inline=False
+            )
+
+            embed.add_field(name="Instructions", value=f'{alert["instruction"]}', inline=False)
+
+            await channel.send("@everyone ‼️ **ALERT FOR YOUR CITY** ‼️")
+            await channel.send(embed=embed)
+
     @daily_weather.before_loop
     async def before_daily_weather(self):
+        await self.bot.wait_until_ready()
+
+    @alert.before_loop
+    async def before_alert(self):
         await self.bot.wait_until_ready()
 
 async def setup(bot):
