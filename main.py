@@ -2,8 +2,11 @@ import asyncio
 
 from bot.client import create_bot
 from bot.config import settings
+from utils.logger import setup_logger
 
 async def main():
+    setup_logger()
+
     bot = create_bot()
 
     async with bot:
