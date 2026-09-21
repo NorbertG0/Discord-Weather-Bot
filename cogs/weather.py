@@ -1,10 +1,14 @@
 import discord
+import logging
 
 from discord.ext import commands
 
 from bot.config import settings
 from services.weather_service import WeatherService
 from utils.validators import validate_city_name
+
+
+logger = logging.getLogger(__name__)
 
 
 class Weather(commands.Cog):
@@ -19,20 +23,41 @@ class Weather(commands.Cog):
         error_msg = validate_city_name(city_name, "weather")
 
         if error_msg:
+            logger.warning(
+                "!weather | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.send(error_msg)
             return
 
         channel = self.bot.get_channel(settings.WEATHER_CHANNEL_ID)
 
         if channel is None:
+            logger.error(
+                "!weather | Channel not found | channel_if=%s",
+                settings.WEATHER_CHANNEL_ID
+            )
             await ctx.send("Weather channel not found.")
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
 
         if error:
+            logger.warning(
+                "!weather | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
             await ctx.send(f"⚠️ {error}")
             return
+
+        logger.info(
+            "!weather | Weather retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
         embed = discord.Embed(
             title=(
@@ -66,6 +91,12 @@ class Weather(commands.Cog):
         embed.set_footer(text=f'last update - {weather["last_updated"]}')
 
         await ctx.send(embed=embed)
+
+        logger.info(
+            "!weather | Weather send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
     @commands.command(name="plot")
     @commands.cooldown(1, 5, commands.BucketType.user)
