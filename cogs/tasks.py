@@ -25,7 +25,7 @@ class Tasks(commands.Cog):
     @tasks.loop(hours=24)
     async def daily_weather(self):
         logger.info(
-            "daily_weather (task) | Task started | city=%s | channel_id=%s",
+            "TASK | daily_weather | Task started | city=%s | channel_id=%s",
             settings.DEFAULT_CITY, settings.FORECAST_CHANNEL_ID
         )
 
@@ -34,19 +34,19 @@ class Tasks(commands.Cog):
 
         except discord.NotFound:
             logger.error(
-                "daily_weather (task) | Task failed - channel not found | channel_id=%s",
+                "TASK | daily_weather | Task failed - channel not found | channel_id=%s",
                 settings.FORECAST_CHANNEL_ID
             )
 
         except discord.Forbidden:
             logger.error(
-                "daily_weather (task) | Task failed - missing permissions | channel_id=%s",
+                "TASK | daily_weather | Task failed - missing permissions | channel_id=%s",
                 settings.FORECAST_CHANNEL_ID
             )
 
         except discord.HTTPException:
             logger.exception(
-                "daily_weather (task) | Task failed - failed to fetch channel | channel_id=%s",
+                "TASK | daily_weather | Task failed - failed to fetch channel | channel_id=%s",
                 settings.FORECAST_CHANNEL_ID
             )
 
@@ -59,7 +59,7 @@ class Tasks(commands.Cog):
 
         if error:
             logger.warning(
-                "daily_weather (task) | Forecast data error | city=%s | error=%s",
+                "TASK | daily_weather | Forecast data error | city=%s | error=%s",
                 settings.DEFAULT_CITY,
                 error
             )
@@ -122,20 +122,20 @@ class Tasks(commands.Cog):
 
         except discord.Forbidden:
             logger.error(
-                "daily_weather (task) | Missing permissions to send message | channel_id=%s",
+                "TASK | daily_weather | Missing permissions to send message | channel_id=%s",
                 settings.FORECAST_CHANNEL_ID
             )
             return
 
         except discord.HTTPException:
             logger.exception(
-                "daily_weather (task) | Failed to send forecast | city=%s",
+                "TASK | daily_weather | Failed to send forecast | city=%s",
                 settings.DEFAULT_CITY
             )
             return
 
         logger.info(
-            "daily_weather (task) | Forecast send successfully | city=%s | channel_id=%s",
+            "TASK | daily_weather | Forecast send successfully | city=%s | channel_id=%s",
             settings.DEFAULT_CITY,
             settings.FORECAST_CHANNEL_ID
         )
@@ -143,7 +143,7 @@ class Tasks(commands.Cog):
     @tasks.loop(hours=24)
     async def alert(self):
         logger.info(
-            "alert (task) | Task started | city=%s | channel_id=%s",
+            "TASK | alert | Task started | city=%s | channel_id=%s",
             settings.DEFAULT_CITY, settings.ALERTS_CHANNEL_ID
         )
 
@@ -152,19 +152,19 @@ class Tasks(commands.Cog):
 
         except discord.NotFound:
             logger.error(
-                "alert (task) | Task failed - channel not found | channel_id=%s",
+                "TASK | alert | Task failed - channel not found | channel_id=%s",
                 settings.ALERTS_CHANNEL_ID
             )
 
         except discord.Forbidden:
             logger.error(
-                "alert (task) | Task failed - missing permissions | channel_id=%s",
+                "TASK | alert | Task failed - missing permissions | channel_id=%s",
                 settings.ALERTS_CHANNEL_ID
             )
 
         except discord.HTTPException:
             logger.exception(
-                "alert (task) | Task failed - failed to fetch channel | channel_id=%s",
+                "TASK | alert | Task failed - failed to fetch channel | channel_id=%s",
                 settings.ALERTS_CHANNEL_ID
             )
 
@@ -178,7 +178,7 @@ class Tasks(commands.Cog):
 
         if error:
             logger.warning(
-                "alert (task) | Forecast data error | city=%s | error=%s",
+                "TASK | alert | Forecast data error | city=%s | error=%s",
                 settings.DEFAULT_CITY,
                 error
             )
@@ -188,7 +188,7 @@ class Tasks(commands.Cog):
 
         if not alerts:
             logger.info(
-                "alert (task) | Alert not found | city=%s | channel_id=%s",
+                "TASK | alert | Alert not found | city=%s | channel_id=%s",
                 settings.DEFAULT_CITY,
                 settings.ALERTS_CHANNEL_ID
             )
@@ -223,20 +223,20 @@ class Tasks(commands.Cog):
 
             except discord.Forbidden:
                 logger.error(
-                    "alert (task) | Missing permissions to send message | channel_id=%s",
+                    "TASK | alert | Missing permissions to send message | channel_id=%s",
                     settings.ALERTS_CHANNEL_ID
                 )
                 return
 
             except discord.HTTPException:
                 logger.exception(
-                    "alert (task) | Failed to send forecast | city=%s",
+                    "TASK | alert | Failed to send forecast | city=%s",
                     settings.DEFAULT_CITY
                 )
                 return
 
             logger.info(
-                "alert (task) | Alert send successfully | city=%s | channel_id=%s",
+                "TASK | alert | Alert send successfully | city=%s | channel_id=%s",
                 settings.DEFAULT_CITY,
                 settings.ALERTS_CHANNEL_ID
             )
