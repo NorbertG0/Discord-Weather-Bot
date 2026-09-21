@@ -1,8 +1,13 @@
 import discord
 from discord.ext import commands, tasks
+import logging
 
 from bot.config import settings
 from services.weather_service import WeatherService
+
+
+logger = logging.getLogger(__name__)
+
 
 class Tasks(commands.Cog):
 
@@ -19,11 +24,31 @@ class Tasks(commands.Cog):
 
     @tasks.loop(hours=24)
     async def daily_weather(self):
-        channel = await self.bot.fetch_channel(settings.FORECAST_CHANNEL_ID)
+        logger.info(
+            "daily_weather (task) | Task started | city=%s | channel_id=%s",
+            settings.DEFAULT_CITY, settings.FORECAST_CHANNEL_ID
+        )
 
-        if channel is None:
-            print("Daily weather task channel not found")
-            return
+        try:
+            channel = await self.bot.fetch_channel(settings.FORECAST_CHANNEL_ID)
+
+        except discord.NotFound:
+            logger.error(
+                "daily_weather (task) | Task failed - channel not found | channel_id=%s",
+                settings.FORECAST_CHANNEL_ID
+            )
+
+        except discord.Forbidden:
+            logger.error(
+                "daily_weather (task) | Task failed - missing permissions | channel_id=%s",
+                settings.FORECAST_CHANNEL_ID
+            )
+
+        except discord.HTTPException:
+            logger.exception(
+                "daily_weather (task) | Task failed - failed to fetch channel | channel_id=%s",
+                settings.FORECAST_CHANNEL_ID
+            )
 
         weather, error = self.weather_service.get_forecast_today(
             settings.DEFAULT_CITY,
@@ -33,7 +58,11 @@ class Tasks(commands.Cog):
         )
 
         if error:
-            print(f"Daily weather error: {error}")
+            logger.warning(
+                "daily_weather (task) | Forecast data error | city=%s | error=%s",
+                settings.DEFAULT_CITY,
+                error
+            )
             return
 
         embed = discord.Embed(
@@ -87,16 +116,57 @@ class Tasks(commands.Cog):
         embed.add_field(name='――――――――――――――――――――――――――――――――', value='', inline=False)
         embed.set_footer(text='last update - ' + str(weather["last_updated"]))
 
-        await channel.send(f"@here Today's forecast for {settings.DEFAULT_CITY}.")
-        await channel.send(embed=embed)
+        try:
+            await channel.send(f"@here Today's forecast for {settings.DEFAULT_CITY}.")
+            await channel.send(embed=embed)
+
+        except discord.Forbidden:
+            logger.error(
+                "daily_weather (task) | Missing permissions to send message | channel_id=%s",
+                settings.FORECAST_CHANNEL_ID
+            )
+            return
+
+        except discord.HTTPException:
+            logger.exception(
+                "daily_weather (task) | Failed to send forecast | city=%s",
+                settings.DEFAULT_CITY
+            )
+            return
+
+        logger.info(
+            "daily_weather (task) | Forecast send successfully | city=%s | channel_id=%s",
+            settings.DEFAULT_CITY,
+            settings.FORECAST_CHANNEL_ID
+        )
 
     @tasks.loop(hours=24)
     async def alert(self):
-        channel = await self.bot.fetch_channel(settings.ALERTS_CHANNEL_ID)
+        logger.info(
+            "alert (task) | Task started | city=%s | channel_id=%s",
+            settings.DEFAULT_CITY, settings.ALERTS_CHANNEL_ID
+        )
 
-        if channel is None:
-            print("Alert task channel not found")
-            return
+        try:
+            channel = await self.bot.fetch_channel(settings.ALERTS_CHANNEL_ID)
+
+        except discord.NotFound:
+            logger.error(
+                "alert (task) | Task failed - channel not found | channel_id=%s",
+                settings.ALERTS_CHANNEL_ID
+            )
+
+        except discord.Forbidden:
+            logger.error(
+                "alert (task) | Task failed - missing permissions | channel_id=%s",
+                settings.ALERTS_CHANNEL_ID
+            )
+
+        except discord.HTTPException:
+            logger.exception(
+                "alert (task) | Task failed - failed to fetch channel | channel_id=%s",
+                settings.ALERTS_CHANNEL_ID
+            )
 
         data, error = self.weather_service.get_forecast_longterm(
             settings.DEFAULT_CITY,
@@ -107,12 +177,21 @@ class Tasks(commands.Cog):
         )
 
         if error:
-            print(f"Alert error: {error}")
+            logger.warning(
+                "alert (task) | Forecast data error | city=%s | error=%s",
+                settings.DEFAULT_CITY,
+                error
+            )
             return
 
         alerts = data["alerts"]
 
         if not alerts:
+            logger.info(
+                "alert (task) | Alert not found | city=%s | channel_id=%s",
+                settings.DEFAULT_CITY,
+                settings.ALERTS_CHANNEL_ID
+            )
             await channel.send(f"There are no alerts for {settings.DEFAULT_CITY}.")
             return
 
@@ -138,8 +217,29 @@ class Tasks(commands.Cog):
 
             embed.add_field(name="Instructions", value=f'{alert["instruction"]}', inline=False)
 
-            await channel.send("@everyone ‼️ **ALERT FOR YOUR CITY** ‼️")
-            await channel.send(embed=embed)
+            try:
+                await channel.send("@everyone ‼️ **ALERT FOR YOUR CITY** ‼️")
+                await channel.send(embed=embed)
+
+            except discord.Forbidden:
+                logger.error(
+                    "alert (task) | Missing permissions to send message | channel_id=%s",
+                    settings.ALERTS_CHANNEL_ID
+                )
+                return
+
+            except discord.HTTPException:
+                logger.exception(
+                    "alert (task) | Failed to send forecast | city=%s",
+                    settings.DEFAULT_CITY
+                )
+                return
+
+            logger.info(
+                "alert (task) | Alert send successfully | city=%s | channel_id=%s",
+                settings.DEFAULT_CITY,
+                settings.ALERTS_CHANNEL_ID
+            )
 
     @daily_weather.before_loop
     async def before_daily_weather(self):
