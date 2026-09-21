@@ -21,7 +21,11 @@ class Forecast(commands.Cog):
         error_msg = validate_city_name(city_name, "forecasttoday")
 
         if error_msg:
-            logger.warning("!forecasttoday | Invalid command attempt, validation error | user=%s", ctx.author)
+            logger.warning(
+                "!forecasttoday | Invalid command attempt, validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
             return
 
@@ -37,7 +41,11 @@ class Forecast(commands.Cog):
             await ctx.channel.send(f"⚠️ {error}")
             return
 
-        logger.info("!forecasttoday | Forecast retrieved | user=%s | city=%s", ctx.author, city_name)
+        logger.info(
+            "!forecasttoday | Forecast retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
         embed = discord.Embed(
             title=(f'{forecast["city"]} '
@@ -87,13 +95,23 @@ class Forecast(commands.Cog):
 
         await ctx.send(embed=embed)
 
+        logger.info(
+            "!forecasttoday | Forecast send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
     @commands.command(name='forecast')
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def forecast(self, ctx, *, city_name=None):
         error_msg = validate_city_name(city_name, "forecast")
 
         if error_msg:
-            logger.warning("!forecast | Invalid command attempt, validation error | user=%s", ctx.author)
+            logger.warning(
+                "!forecast | Invalid command attempt, validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
             return
 
@@ -106,10 +124,18 @@ class Forecast(commands.Cog):
         )
 
         if error:
-            logger.warning(f"!forecast | Forecast data error | user=%s", ctx.author)
+            logger.warning(
+                "!forecast | Forecast data error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
 
-        logger.info("!forecast | Forecast retrieved | user=%s | city=%s", ctx.author, city_name)
+        logger.info(
+            "!forecast | Forecast retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
         embed = discord.Embed(
             title=(f'{forecast["city"]} '
@@ -133,6 +159,12 @@ class Forecast(commands.Cog):
         embed.set_footer(text='last update - ' + str(forecast["last_update"]))
 
         await ctx.channel.send(embed=embed)
+
+        logger.info(
+            "!forecast | Forecast send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
 
 async def setup(bot):
