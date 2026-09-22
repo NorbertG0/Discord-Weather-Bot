@@ -1,6 +1,11 @@
 import requests
+import logging
 
 from bot.config import settings
+
+
+logger = logging.getLogger(__name__)
+
 
 class WeatherAPI:
     BASE_URL = "https://api.weatherapi.com/v1"
@@ -20,10 +25,19 @@ class WeatherAPI:
             return response.json(), None
 
         except requests.exceptions.Timeout:
+            logger.warning(
+                "Weather API timeout | endpoint=%s | city=%s",
+                endpoint,
+                params.get("q")
+            )
             return None, "The server did not respond in time"
 
-        except requests.exceptions.RequestException as error:
-            print(f"Error fetching weather data: {error}")
+        except requests.exceptions.RequestException:
+            logger.exception(
+                "Weather API request error | endpoint=%s | city=%s",
+                endpoint,
+                params.get("q")
+            )
             return None, "Error fetching weather data"
 
     def get_current_weather(self, city, lang):
