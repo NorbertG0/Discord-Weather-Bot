@@ -104,21 +104,47 @@ class Weather(commands.Cog):
         error_msg = validate_city_name(city_name, "plot")
 
         if error_msg:
+            logger.warning(
+                "!plot | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
             return
 
-        plot, error = self.weather_service.create_plot(city_name, days="1", alerts="no", aqi="no")
+        plot_data, error = self.weather_service.create_plot(city_name, days="1", alerts="no", aqi="no")
 
         if error:
+            logger.warning(
+                "!plot | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
             await ctx.send(f"⚠️ {error}")
             return
 
-        file = discord.File(plot, filename="plot.png")
+        try:
+            file = discord.File(plot_data, filename="plot.png")
 
-        embed = discord.Embed(title=f'📊 Temperature graph ({city_name})', color=0x346eeb)
-        embed.set_image(url='attachment://plot.png')
+            embed = discord.Embed(title=f'📊 Temperature graph ({city_name})', color=0x346eeb)
+            embed.set_image(url='attachment://plot.png')
+
+        except Exception:
+            logger.exception(
+                "!plot | Plot creation error | city=%s",
+                city_name
+            )
+            await ctx.send("⚠️ Failed to create temperature graph.")
+            return
 
         await ctx.send(embed=embed, file=file)
+
+        logger.info(
+            "!plot | Weather plot send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
     @commands.command(name="temperature")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -126,10 +152,21 @@ class Weather(commands.Cog):
         error_msg = validate_city_name(city_name, "temperature")
 
         if error_msg:
+            logger.warning(
+                "!temperature | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        logger.info(
+            "!temperature | Temperature data retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
         embed = discord.Embed(
             title=(
@@ -148,16 +185,33 @@ class Weather(commands.Cog):
 
         await ctx.channel.send(embed=embed)
 
+        logger.info(
+            "!temperature | Temperature send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
     @commands.command(name="wind")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def wind(self, ctx, *, city_name=None):
         error_msg = validate_city_name(city_name, "wind")
 
         if error_msg:
+            logger.warning(
+                "!wind | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        logger.info(
+            "!wind | Wind data retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
         embed = discord.Embed(
             title=(
@@ -173,16 +227,33 @@ class Weather(commands.Cog):
 
         await ctx.channel.send(embed=embed)
 
+        logger.info(
+            "!wind | Wind data send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
     @commands.command(name="humidity")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def humidity(self, ctx, *, city_name=None):
         error_msg = validate_city_name(city_name, "humidity")
 
         if error_msg:
+            logger.warning(
+                "!humidity | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        logger.info(
+            "!humidity | Humidity data retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
         embed = discord.Embed(
             title=(
@@ -195,7 +266,14 @@ class Weather(commands.Cog):
 
         embed.set_thumbnail(url='https:' + str(weather["icon"]))
         embed.set_footer(text='last update - ' + str(weather["last_updated"]))
+
         await ctx.channel.send(embed=embed)
+
+        logger.info(
+            "!humidity | Humidity data send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
     @commands.command(name="pressure")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -203,10 +281,21 @@ class Weather(commands.Cog):
         error_msg = validate_city_name(city_name, "pressure")
 
         if error_msg:
+            logger.warning(
+                "!pressure | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        logger.info(
+            "!pressure | Pressure data retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
         embed = discord.Embed(
             title=(
@@ -221,6 +310,11 @@ class Weather(commands.Cog):
         embed.set_footer(text='last update - ' + str(weather["last_updated"]))
 
         await ctx.channel.send(embed=embed)
+        logger.info(
+            "!pressure | Pressure data send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
     @commands.command(name="aqi")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -228,10 +322,21 @@ class Weather(commands.Cog):
         error_msg = validate_city_name(city_name, "air_quality")
 
         if error_msg:
+            logger.warning(
+                "!aqi | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
             await ctx.channel.send(error_msg)
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        logger.info(
+            "!aqi | Air quality data retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
 
         embed = discord.Embed(
             title=(
@@ -267,6 +372,13 @@ class Weather(commands.Cog):
         embed.set_footer(text='last update - ' + str(weather["last_updated"]))
 
         await ctx.channel.send(embed=embed)
+
+        logger.info(
+            "!aqi | Air quality data send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
 
 async def setup(bot):
     await bot.add_cog(Weather(bot))
