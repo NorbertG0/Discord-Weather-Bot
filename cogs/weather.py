@@ -50,7 +50,7 @@ class Weather(commands.Cog):
                 city_name,
                 error
             )
-            await ctx.send(f"⚠️ {error}")
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
             return
 
         logger.info(
@@ -121,7 +121,7 @@ class Weather(commands.Cog):
                 city_name,
                 error
             )
-            await ctx.send(f"⚠️ {error}")
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
             return
 
         try:

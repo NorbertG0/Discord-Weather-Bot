@@ -38,7 +38,7 @@ class Forecast(commands.Cog):
 
         if error:
             logger.warning(f"Forecast data error | user=%s", ctx.author)
-            await ctx.channel.send(f"⚠️ {error}")
+            await ctx.channel.send(f"⚠️ Unable to retrieve weather data right now. Please try again later.")
             return
 
         logger.info(
@@ -129,7 +129,7 @@ class Forecast(commands.Cog):
                 ctx.author,
                 city_name
             )
-            await ctx.channel.send(error_msg)
+            await ctx.channel.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
 
         logger.info(
             "!forecast | Forecast retrieved | user=%s | city=%s",
