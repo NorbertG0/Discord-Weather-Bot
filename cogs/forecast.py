@@ -166,6 +166,66 @@ class Forecast(commands.Cog):
             city_name
         )
 
+    @commands.command(name="sun")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def sun(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "sun")
+
+        if error_msg:
+            logger.warning(
+                "!sun | Validation error | user=%s | city=%s",
+            )
+            await ctx.channel.send(error_msg)
+            return
+
+        forecast, error = self.weather_service.get_forecast_today(
+            city_name,
+            settings.LANG,
+            "no",
+            "no"
+        )
+
+        if error:
+            logger.warning(f"Forecast data error | user=%s", ctx.author)
+            await ctx.channel.send(f"⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
+
+        logger.info(
+            "!sun | Sun data retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
+        embed = discord.Embed(
+            title=(
+                f'{forecast["city"]} '
+                f'({forecast["country"]})'
+            ),
+            description='',
+            color=0x346eeb
+        )
+
+        embed.add_field(
+            name=(f'Sunrise               '
+                  f'    Sunset'
+                  ),
+            value='',
+            inline=False,
+        )
+
+        embed.add_field(
+            name=(f'☀️  {forecast["sunrise"]}      '
+                  f'🌅  {forecast["sunset"]}     '
+                  ),
+            value='',
+            inline=False,
+        )
+
+        embed.set_footer(text='last update - ' + str(forecast["last_updated"]))
+
+        await ctx.channel.send(embed=embed)
+
+
 
 async def setup(bot):
     await bot.add_cog(Forecast(bot))
