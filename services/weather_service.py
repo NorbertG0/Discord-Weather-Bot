@@ -57,6 +57,7 @@ class WeatherService:
         location = data["location"]
         current = data["current"]
         forecast = data["forecast"]["forecastday"][0]["day"]
+        astro = data["forecast"]["forecastday"][0]["astro"]
 
         weather = {
             "city": location["name"],
@@ -80,6 +81,15 @@ class WeatherService:
 
             "text": forecast["condition"]["text"],
             "icon": forecast["condition"]["icon"],
+
+            "sunrise": astro["sunrise"],
+            "sunset": astro["sunset"],
+            "moonrise": astro["moonrise"],
+            "moonset": astro["moonset"],
+            "moon_phase": astro["moon_phase"],
+            "moon_illumination": astro["moon_illumination"],
+            "is_moon_up": astro["is_moon_up"],
+            "is_sun_up": astro["is_sun_up"],
         }
 
         return weather, None
