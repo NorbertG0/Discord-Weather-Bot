@@ -207,7 +207,7 @@ class Forecast(commands.Cog):
 
         embed.add_field(
             name=(f'Sunrise               '
-                  f'    Sunset'
+                  f'   Sunset'
                   ),
             value='',
             inline=False,
@@ -221,6 +221,26 @@ class Forecast(commands.Cog):
             inline=False,
         )
 
+        embed.add_field(name='――――――――――――――――――――――――――――――――', value='', inline=False)
+        embed.add_field(name=f'{forecast["moon_phase"]} ({forecast["moon_illumination"]} %)', value='', inline=False)
+
+        embed.add_field(
+            name=(f'Moonrise               '
+                  f'   Moonset'
+                  ),
+            value='',
+            inline=False,
+        )
+
+        embed.add_field(
+            name=(f'🌙 ⬆️  {forecast["moonrise"]}      '
+                  f'🌙 ⬇️  {forecast["moonset"]}     '
+                  ),
+            value='',
+            inline=False,
+        )
+
+        embed.add_field(name=' ', value='', inline=False)
         embed.set_footer(text='last update - ' + str(forecast["last_updated"]))
 
         await ctx.channel.send(embed=embed)
