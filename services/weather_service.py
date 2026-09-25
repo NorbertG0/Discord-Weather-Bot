@@ -1,4 +1,4 @@
-import plotly.graph_objects as px
+import plotly.express as px
 import io
 
 from services.weather_api import WeatherAPI
@@ -125,7 +125,6 @@ class WeatherService:
         data = {"Hour": time, "Temp": temp}
 
         fig = px.line(data, x="Hour", y="Temp", title="Today's forecast graph")
-        fig.show()
         buf = io.BytesIO()
         fig.write_image(buf, format="png")
         buf.seek(0)
