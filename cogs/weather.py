@@ -88,6 +88,30 @@ class Weather(commands.Cog):
             inline=False
         )
 
+        embed.add_field(name=" ", value="", inline=False)
+        embed.add_field(name='Quality of air', value='', inline=False)
+
+        embed.add_field(
+            name=(
+                f'CO - {weather["co"]} mg/m³      '
+                f'NO₂ - {weather["no2"]} µg/m³      '
+                f'PM₂ ̦₅ - {weather["pm2_5"]} µg/m³'
+            ),
+            value='',
+            inline=False
+        )
+
+        embed.add_field(
+            name=(
+                f'O₃ - {weather["o3"]} µg/m³           '
+                f'SO₂ - {weather["so2"]} µg/m³        '
+                f'PM₁₀ - {weather["pm10"]} µg/m³'
+            ),
+            value='',
+            inline=False
+        )
+
+        embed.add_field(name=" ", value="", inline=False)
         embed.set_footer(text=f'last update - {weather["last_updated"]}')
 
         await ctx.send(embed=embed)
