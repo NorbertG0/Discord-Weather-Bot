@@ -1,28 +1,26 @@
 # ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
-## 📑 Table of Contents
-- [About](#-about)
-- [Features](#-features)
-- [Installation](#-installation)
-- [Usage](#-usage)
-  
+
 ## 🚀 About
 <p align="justify">
-This is a simple Discord bot written in Python that provides real-time weather information using WeatherAPI.com. Users can request weather data for any location, including current conditions, forecasts, temperature, humidity, wind speed, and more. The bot integrates seamlessly with Discord, allowing interaction through text commands. Weather details are fetched from WeatherAPI.com and presented in a clear, easy-to-read format.
+Discord bot that provides weather information directly through Discord commands. The bot uses WeatherAPI.com to retrieve up-to-date weather data and presents it in a clear, easy-to-read format using Discord embeds.
 </p>
 
 ## ⚙ Features
 
 * **Current Weather**: Displays current weather details (temperature, humidity, wind speed, pressure and quality of air informations).
   <p align="center">
-  <img src="https://i.imgur.com/WkNF8i7.png" />
+    <img width="49%" alt="image" src="https://github.com/user-attachments/assets/e9482833-32df-490c-aa50-0bbf2abeb923" />
+    <img width="49%" alt="image" src="https://github.com/user-attachments/assets/630f6602-bc89-4cc4-a679-2e3f2e9fc6e9" />
   </p>
 * **Weather Forecast**: Shows weather forecast for today or next three days.
   <p align="center">
-  <img src="https://i.imgur.com/5RMxh4F.png" />
+   <img width="49%" alt="image" src="https://github.com/user-attachments/assets/719177a0-8e40-4a98-ae16-eb5187c55a48" />
+      <img width="44%" alt="image" src="https://github.com/user-attachments/assets/6cde15e2-e88f-4d64-85ed-18837dde1e58" />
   </p>
 * **Forecast Graph**: Creates a graph based on the weather forecast.
   <p align="center">
-  <img src="https://i.imgur.com/kOhvH1o.png" />
+  <img width="44%" src="https://i.imgur.com/kOhvH1o.png" />
+    <img width="45%" alt="image" src="https://github.com/user-attachments/assets/8f7af4bc-08c2-4984-8a96-b40fffdcf4a5" />
   </p>
 * **Weather Alerts**: Sends notifications about important weather events and alerts for selected city.
   <p align="center">
@@ -30,22 +28,8 @@ This is a simple Discord bot written in Python that provides real-time weather i
   </p>
 * **Air Quality Information**: Provides detailed air quality data such as AQI (Air Quality Index) for a city.
   <p align="center">
-  <img src="https://i.imgur.com/hCqyuj4.png" />
-  </p>
-* **Default City Change**: Administrator can set or change the default city that the bot tracks.
-  <p align="center">
-  <img src="https://i.imgur.com/oKMSJrY.png" />
-  </p>
-* **Language Change**: Administrator can change the language of the weather data.
-  <p align="center">
-  <img src="https://i.imgur.com/yIIJamB.png" />
-  </p>
-* **Command Error Handling**: The bot detects and handles invalid commands or missing arguments.
-  <p align="center">
-  <img src="https://i.imgur.com/pe0ksxp.png" />
-  </p>
-  <p align="center">
-  <img src="https://i.imgur.com/8tZK4SP.png" />
+  <img width="47%" src="https://i.imgur.com/hCqyuj4.png" />
+    <img width="45%" alt="image" src="https://github.com/user-attachments/assets/474d49a8-d277-453b-bb0e-515d25434da3" />
   </p>
 
 ## 🛠 Installation
