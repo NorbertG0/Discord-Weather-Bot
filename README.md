@@ -24,7 +24,9 @@ Discord bot that provides weather information directly through Discord commands.
   </p>
 * **Weather Alerts**: Sends notifications about important weather events and alerts for selected city.
   <p align="center">
-  <img src="https://i.imgur.com/PcgnnXz.png" />
+  <img width="41%" src="https://i.imgur.com/PcgnnXz.png" />
+    <img width="53%" alt="image" src="https://github.com/user-attachments/assets/5c133a95-a834-41f4-8ebb-feb707164f50" />
+
   </p>
 * **Air Quality Information**: Provides detailed air quality data such as AQI (Air Quality Index) for a city.
   <p align="center">
@@ -33,47 +35,32 @@ Discord bot that provides weather information directly through Discord commands.
   </p>
 
 ## 🛠 Installation
-* Create and configure your bot on [Discord Developer Portal](https://discord.com/developers/applications)
-* Create an account on [WeatherAPI.com](https://www.weatherapi.com/)
-* Get your API Key [Your API Key](https://www.weatherapi.com/my/)
-  <p align="center">
-  <img src="https://i.imgur.com/HzgaZgp.png" />
-  </p>
-* Create a  `.env` file and fill it out based on the example
-  ```env
-    DISCORD_TOKEN=your_discord_token
-    WEATHER_API_KEY=your_weather_api_key
-    WEATHER_CHANNEL_ID=your_weather_channel_id
-    FORECAST_CHANNEL_ID=your_forecast_channel_id
-    ALERTS_CHANNEL_ID=your_alert_channel_id
-   ```
-  + To get your Discord token, click "Reset".
-    <p align="center">
-    <img src="https://i.imgur.com/qfStkrM.png" />
-    </p>
-
-  + You need to turn on developer mode in settings to see channels id's (right click on channel).
   
-* Open the terminal and install Python packages
-  ```sh
-  pip install -r requirements.txt
-   ```
-  Packages documentation
-  + [requests](https://pypi.org/project/requests/)
-  + [discord.py](https://pypi.org/project/discord.py/)
-  + [python-dotenv](https://pypi.org/project/python-dotenv/)
-  + [plotly](https://pypi.org/project/plotly/)
+## ✨ Available commands
+### Weather Commands
 
-* Execute the program
-  ```sh
-  python main.py
-  ```
-  If you have completed all the steps correctly, you should get this result in the console.
-  <p align="center">
-  <img src="https://i.imgur.com/Q15wQKq.png" />
-  </p>
-  The bot is now ready to work.
-  
-## ✨ Usage
-### Commands
-After running the program, type  `!commands` to see all available commands.
+| Command | Description |
+|---|---|
+| `!weather <city>` | Displays the current weather conditions. |
+| `!temperature <city>` | Displays the current temperature. |
+| `!wind <city>` | Shows the current wind speed. |
+| `!humidity <city>` | Displays the current humidity. |
+| `!pressure <city>` | Shows the current atmospheric pressure. |
+| `!sun <city>` | Shows sun and moon data. |
+| `!aqi <city>` | Shows the current air quality. |
+| `!forecast <city>` | Shows 3 days weather forecast. |
+| `!forecasttoday <city>` | Shows today's weather forecast. |
+| `!plot <city>` | Generates a temperature forecast graph. |
+
+### Admin Commands
+
+| Command | Description |
+|---|---|
+| `!setcity <city>` | Changes the default city. |
+| `!setlang <code>` | Changes the default language. |
+
+### Other Commands
+
+| Command | Description |
+|---|---|
+| `!commands` | Lists all available commands. |
