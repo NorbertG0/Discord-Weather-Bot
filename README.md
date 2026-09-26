@@ -20,7 +20,8 @@ Discord bot that provides weather information directly through Discord commands.
 * **Forecast Graph**: Creates a graph based on the weather forecast.
   <p align="center">
   <img width="44%" src="https://i.imgur.com/kOhvH1o.png" />
-    <img width="45%" alt="image" src="https://github.com/user-attachments/assets/8f7af4bc-08c2-4984-8a96-b40fffdcf4a5" />
+
+    <img width="45%" alt="image" src="https://github.com/user-attachments/assets/cba2bcd0-1b5c-48ca-95dd-5dc12922b043" />
   </p>
 * **Weather Alerts**: Sends notifications about important weather events and alerts for selected city.
   <p align="center">
@@ -50,7 +51,9 @@ Discord bot that provides weather information directly through Discord commands.
 | `!aqi <city>` | Shows the current air quality. |
 | `!forecast <city>` | Shows 3 days weather forecast. |
 | `!forecasttoday <city>` | Shows today's weather forecast. |
-| `!plot <city>` | Generates a temperature forecast graph. |
+| `!tempchart <city>` | Generates a temperature forecast graph. |
+| `!windchart <city>` | Generates a wind forecast graph. |
+| `!humchart <city>` | Generates a humidity forecast graph. |
 
 ### Admin Commands
 
