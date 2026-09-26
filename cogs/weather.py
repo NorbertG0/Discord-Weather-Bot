@@ -122,25 +122,25 @@ class Weather(commands.Cog):
             city_name
         )
 
-    @commands.command(name="plot")
+    @commands.command(name="tempchart")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def plot(self, ctx, *, city_name=None):
-        error_msg = validate_city_name(city_name, "plot")
+    async def temperature_chart(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "tempchart")
 
         if error_msg:
             logger.warning(
-                "!plot | Validation error | user=%s | city=%s",
+                "!tempchart | Validation error | user=%s | city=%s",
                 ctx.author,
                 city_name
             )
             await ctx.channel.send(error_msg)
             return
 
-        plot_data, error = self.weather_service.create_plot(city_name, days="1", alerts="no", aqi="no")
+        plot_data, error = self.weather_service.create_temperature_chart(city_name, days="1", alerts="no", aqi="no")
 
         if error:
             logger.warning(
-                "!plot | Weather data error | user=%s | city=%s | error=%s",
+                "!tempchart | Weather data error | user=%s | city=%s | error=%s",
                 ctx.author,
                 city_name,
                 error
@@ -156,7 +156,7 @@ class Weather(commands.Cog):
 
         except Exception:
             logger.exception(
-                "!plot | Plot creation error | city=%s",
+                "!tempchart | Plot creation error | city=%s",
                 city_name
             )
             await ctx.send("⚠️ Failed to create temperature graph.")
@@ -165,7 +165,7 @@ class Weather(commands.Cog):
         await ctx.send(embed=embed, file=file)
 
         logger.info(
-            "!plot | Weather plot send | user=%s | city=%s",
+            "!tempchart | Weather plot send | user=%s | city=%s",
             ctx.author,
             city_name
         )

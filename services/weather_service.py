@@ -120,7 +120,7 @@ class WeatherService:
 
         return weather, None
 
-    def create_plot(self, city, days="1", alerts="no", aqi="no"):
+    def create_temperature_chart(self, city, days="1", alerts="no", aqi="no"):
 
         data, error = self.api.get_data_for_plot(city, days, alerts, aqi)
 
