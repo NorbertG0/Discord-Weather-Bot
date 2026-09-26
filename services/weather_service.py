@@ -140,3 +140,25 @@ class WeatherService:
         buf.seek(0)
 
         return buf, None
+
+    def create_wind_chart(self, city, days="1", alerts="no", aqi="no"):
+
+        data, error = self.api.get_data_for_plot(city, days, alerts, aqi)
+
+        if error:
+            return None, error
+
+        forecast = data["forecast"]["forecastday"][0]["hour"]
+
+        time = [x["time"] for x in forecast]
+        wind = [x["wind_kph"] for x in forecast]
+
+        data = {"Hour": time, "Wind": wind}
+
+        fig = px.line(data, x="Hour", y="Wind", title="Today's wind graph (km/h)")
+        buf = io.BytesIO()
+        fig.write_image(buf, format="png")
+        buf.seek(0)
+
+        return buf, None
+

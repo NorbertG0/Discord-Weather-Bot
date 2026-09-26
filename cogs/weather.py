@@ -170,6 +170,54 @@ class Weather(commands.Cog):
             city_name
         )
 
+    @commands.command(name="windchart")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def wind_chart(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "windchart")
+
+        if error_msg:
+            logger.warning(
+                "!windchart | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
+            await ctx.channel.send(error_msg)
+            return
+
+        plot_data, error = self.weather_service.create_wind_chart(city_name, days="1", alerts="no", aqi="no")
+
+        if error:
+            logger.warning(
+                "!windchart | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
+
+        try:
+            file = discord.File(plot_data, filename="plot.png")
+
+            embed = discord.Embed(title=f'📊 Wind graph ({city_name})', color=0x346eeb)
+            embed.set_image(url='attachment://plot.png')
+
+        except Exception:
+            logger.exception(
+                "!windchart | Plot creation error | city=%s",
+                city_name
+            )
+            await ctx.send("⚠️ Failed to create wind graph.")
+            return
+
+        await ctx.send(embed=embed, file=file)
+
+        logger.info(
+            "!windchart | Weather plot send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
     @commands.command(name="temperature")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def temperature(self, ctx, *, city_name=None):
